@@ -51,7 +51,7 @@ function Header() {
                     <a onClick={logout} className="nav-link" role='button'>Logout</a>
                   </li>
                   <li className="nav-item">                    
-                    <NavLink className="nav-link" to={'/cart'}>Cart(5)</NavLink>
+                    <NavLink className="nav-link" to={'/cart'}>Cart({totalProduct})</NavLink>
                   </li>
                   <li className="nav-item">
                   <a className="nav-link disabled" aria-disabled="true">{ customer.firstName + ' ' + customer.lastName }</a>
