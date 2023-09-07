@@ -29,7 +29,8 @@ function Header() {
   const [search, setSearch] = useState("")
   const fncSendSearch=(evt:FormEvent)=>{
     evt.preventDefault()
-    navigate("/search/"+search)
+    //navigate("/search/"+search)
+    window.location.href = "/search/"+search
   }
   
   return (

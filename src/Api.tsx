@@ -62,16 +62,17 @@ export const addCard = ( userId: number, id: number ) => {
     return config.post<CardModel>('carts/add', sendObj)
 }
 
-//user cart
-export const userCart =(id:number)=>{
-    return config.get<UserCartModel>("carts/user/"+id)
+// user cart
+export const userCart = ( id:number ) => {
+    return config.get<UserCartModel>('carts/user/'+id)
 }
 
-export const search =(q:string,skip:number)=>{
-    const sendObj={
-        q:q,
-        limit:8,
-        skip:skip
+// search
+export const search = (q:string, limitCount: number, skip: number) => {
+    const sendObj = {
+        q: q,
+        limit: limitCount,
+        skip: limitCount * skip
     }
-    return config.get<IProducts>("/products/search",{params:sendObj})
+    return config.get<IProducts>('products/search', {params: sendObj})
 }
