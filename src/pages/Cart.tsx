@@ -5,6 +5,8 @@ import { getCustomer } from '../util'
 import { useNavigate } from 'react-router-dom'
 import { userCart } from '../Api'
 import { UserCartModel } from '../models/UserCartModel'
+import Footer from '../components/Footer'
+import { Helmet } from 'react-helmet'
 
 function Cart() {
 
@@ -36,6 +38,10 @@ function Cart() {
 
   return (
     <>
+        <Helmet>
+            <title>E-Commerce - Cards</title>
+            <meta name='description' content='E-Commerce Cards'></meta>
+        </Helmet>
         <Header />
         <NavBar />
         { cartInfo &&
@@ -103,6 +109,7 @@ function Cart() {
                 </table>
             </>
         }
+        
     </>
   )
 }

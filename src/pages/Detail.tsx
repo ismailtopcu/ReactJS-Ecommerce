@@ -9,6 +9,8 @@ import ProductItem from '../components/ProductItem'
 import NavBar from '../components/Navbar'
 import Header from '../components/Header'
 import { getCustomer } from '../util'
+import Footer from '../components/Footer'
+import { Helmet } from 'react-helmet'
 
 function Detail() {
 
@@ -80,6 +82,10 @@ function Detail() {
     <>
         { item &&
             <>
+            <Helmet>
+                <title>{item.title}</title>
+                <meta name='description' content={item.description}></meta>
+            </Helmet>
                 <Header />
                 <NavBar />
                 <div className='row'>
@@ -124,6 +130,7 @@ function Detail() {
                 </div>
             </>
         }
+        
     </>
   )
 }

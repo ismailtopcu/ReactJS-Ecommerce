@@ -6,6 +6,9 @@ import { singleCategoryProducts } from '../Api'
 import { IProducts } from '../models/IProducts'
 import ProductItem from '../components/ProductItem'
 import Header from '../components/Header'
+import Footer from '../components/Footer'
+import { Helmet } from 'react-helmet'
+import { title } from 'process'
 
 function Category() {
 
@@ -28,6 +31,10 @@ function Category() {
 
   return (
     <>
+        <Helmet>
+            <title>{firstUpper(catName!)}</title>
+            <meta name='description' content={firstUpper(catName!)+"Categories"}></meta>
+        </Helmet>
         <Header />
         <NavBar/>
         <div className='container-fluid'>
