@@ -6,11 +6,11 @@ import { toast } from 'react-toastify'
 import { Rating } from 'react-simple-star-rating'
 import ImageGallery from "react-image-gallery";
 import ProductItem from '../components/ProductItem'
-import NavBar from '../components/Navbar'
+import NavBar from '../components/NavBar'
 import Header from '../components/Header'
 import { getCustomer } from '../util'
-import Footer from '../components/Footer'
-import { Helmet } from 'react-helmet'
+import {Helmet} from "react-helmet";
+import { Animate }  from 'react-simple-animate';
 
 function Detail() {
 
@@ -18,6 +18,7 @@ function Detail() {
   const navigate = useNavigate()
   const [item, setItem] = useState<Product>()
   const [images, setImages] = useState<any[]>()
+  const [isLoad, setIsLoad] = useState(false)
 
   useEffect( () => {
     const idNum = Number(id)
@@ -25,6 +26,7 @@ function Detail() {
         navigate('/')
     }else {
         // servis ziyaretinde bulun
+        setIsLoad(false)
         toast('Yükleniyor', {
             position: "top-center",
             theme: "light",
@@ -44,13 +46,15 @@ function Detail() {
             }
             setImages(arr)
             toast.dismiss()
+            setTimeout(() => {
+                setIsLoad(true)
+            }, 800);
         }).catch(err => {
             toast.dismiss()
             toast.error('Servis Hatası!')
         })
     }
   }, [])
-
   const [proObj, setProObj] = useState<IProducts>()
   useEffect(() => {
     const skip = Math.floor(Math.random() * 96)
@@ -60,7 +64,6 @@ function Detail() {
     } )
   }, [])
   
-
   const addBasket = () => {
     const customer = getCustomer()
     if ( customer === null ) {
@@ -76,21 +79,32 @@ function Detail() {
         })
     }
   }
-
-
   return (
     <>
         { item &&
             <>
-            <Helmet>
-                <title>{item.title}</title>
-                <meta name='description' content={item.description}></meta>
-            </Helmet>
+                <Helmet>
+                    <title>{item.title}</title>
+                    <meta name='description' content={item.description}></meta>
+                </Helmet>
                 <Header />
                 <NavBar />
                 <div className='row'>
                     <div className='col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 mb-3'>
-                        <h2>{item.title}</h2>
+                        <Animate
+                            play={isLoad}
+                            start={{ 
+                                opacity: 0,
+                                transform: "translateX(100px)" 
+                            }}
+                            end={{ 
+                                opacity: 1,
+                                transform: "translateX(0px)"  
+                            }}
+                        >
+                            <h2>{item.title}</h2>
+                        </Animate>
+
                         <div className="card">
                             <div className="card-body">
                             {item.description}
@@ -120,7 +134,6 @@ function Detail() {
                         }
                     </div>
                 </div>
-
                 <h2>Sizin için seçtiklerimiz</h2>
                 <hr></hr>
                 <div className='row'>
@@ -130,9 +143,7 @@ function Detail() {
                 </div>
             </>
         }
-        
     </>
   )
 }
-
 export default Detail
