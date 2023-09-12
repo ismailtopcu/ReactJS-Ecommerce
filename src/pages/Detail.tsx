@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 import { Rating } from 'react-simple-star-rating'
 import ImageGallery from "react-image-gallery";
 import ProductItem from '../components/ProductItem'
-import NavBar from '../components/NavBar'
+import NavBar from '../components/Navbar'
 import Header from '../components/Header'
 import { getCustomer } from '../util'
 import {Helmet} from "react-helmet";
